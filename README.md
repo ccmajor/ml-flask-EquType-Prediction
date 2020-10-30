@@ -1,2 +1,5 @@
 # ml-flask-EquType-Prediction
-An example to create Naive Bayes based prediction web app for special equipment classification.
+An example to create a prediction web app for special equipment classification based on Naive Bayes.
+
+---
+Also a research on the application of natural language processing technology in the public opinion management of special equipment.

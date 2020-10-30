@@ -7,3 +7,4 @@ Also a research on the application of natural language processing technology in 
 ---
 # Dependencies
 See in flask-app/requirements.txt.
+

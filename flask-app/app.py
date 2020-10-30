@@ -160,4 +160,4 @@ def get_EquType():
     
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(host='192.168.5.206', port=5632)

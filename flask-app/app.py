@@ -120,7 +120,7 @@ def get_EquType():
             # word_list = pseg.cut(chinese_only)
 
             # jieba分词
-            # seg_list = jieba.cut("欢迎来到小象学院", cut_all=True) # 全模式
+            # seg_list = jieba.cut("这是一句话", cut_all=True) # 全模式
             # print("全模式: " + "/ ".join(seg_list))  # 全模式
 
             seg_list = jieba.cut(chinese_only, cut_all=False)  # 精确模式
@@ -197,7 +197,7 @@ def get_EquTypeAPI():
             # word_list = pseg.cut(chinese_only)
 
             # jieba分词
-            # seg_list = jieba.cut("欢迎来到小象学院", cut_all=True) # 全模式
+            # seg_list = jieba.cut("这是一句话", cut_all=True) # 全模式
             # print("全模式: " + "/ ".join(seg_list))  # 全模式
 
             seg_list = jieba.cut(chinese_only, cut_all=False)  # 精确模式

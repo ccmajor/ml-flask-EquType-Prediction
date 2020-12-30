@@ -165,7 +165,8 @@ def get_EquTypeAPI():
     if request.method=='POST':
         result=request.json
         result_df=pd.DataFrame(result)
-        pubwords = result_df.loc[1,'words']
+
+        #pubwords = result_df.loc[1,'words']
 
         # 停用词表路径
         stop_words_path = '.\stop_words'
@@ -214,25 +215,28 @@ def get_EquTypeAPI():
             return ' '.join(meaninful_words)
             return ' '.join(seg_list)  # 返回内容，而非地址，如果直接 return seg_list 返回的是地址
 
-        pub_test = proc_text(pubwords)
-        pub_test_words = [pub_test]  # 为训练集创建list对象
-        # for line_index in range(len(x_test)):
-        #     try:
-        #         # x_train[line_index][word_index] = str(x_train[line_index][word_index])
-        #         words.append(' '.join(x_test[line_index]))  # x_train转为list对象
-        #     except:
-        #         print(line_index)
-        print(pub_test_words[0])
+        #pub_test = proc_text(pubwords)
+        #pub_test_words = [pub_test]  # 为训练集创建list对象
+        result_df['words_'] = result_df['words'].apply(proc_text)
+
+        pubwords = []
+        for line_index in range(len(result_df['words_'])):
+            try:
+                # x_train[line_index][word_index] = str(x_train[line_index][word_index])
+                pubwords.append(' '.join(result_df.loc[line_index,'words_']))  # 转为list对象
+            except:
+                print(line_index)
 
         #x_test_words=['早 上   点   广 州   番 禺   兴 南   大 道   一 间   名 为   新 丰   小 食 店   街 坊   回 忆   当 时   正 常   做 生 意   突 然   听 到   一 声   巨 响   小 食 店   出   浓 烟   店 内   大 量   物 品   炸 毁   现 场   一 片 狼 藉']
-        vec_test_word = vec.transform(pub_test_words)
-        print(vec_test_word)
-        print(vec_test_word.shape)
+
+        # vec_test_word = vec.transform(pub_test_words)
+        # print(vec_test_word)
+        # print(vec_test_word.shape)
 
 
         #pkl_file = open('classifier.pkl', 'rb')
         new_classifier = joblib.load('joblib_classifier.pkl')
-        prediction = new_classifier.predict(vec_test_word[0:1])
+        prediction = list(new_classifier.predict(vec.transform(pubwords)))
 
         #return render_template('result.html',prediction=prediction)
         return jsonify({'prediction': str(prediction)})
